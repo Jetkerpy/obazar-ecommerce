@@ -54,7 +54,7 @@ API page
             <span>The first step is to send a POST request to the /api/token endpoint of the <b class="text-danger o-bazar__">O</b> <b class="o-bazar__">bazar</b>  with the following code of Python.</span><br>
             <p><b>Example</b></p>
             <p>The following Python creates and sends an authorization request to get Token</p>
-            <pre><code>post_url = "http://localhost/api/token/"
+            <pre><code>post_url = "https://berdibaevichpy.pythonanywhere.com/api/token/"
               email = input("Enter E-mail: ")
               password = input("Enter password: ")
               get_response_token = requests.post(auth_url, json={"email": email, "password": password})
@@ -68,7 +68,7 @@ API page
             <code>access_token = get_response_token.json()['access']</code><br>
 
             <code>
-                    url = "http://127.0.0.1:8000/api/category/" <br>
+                    url = "https://berdibaevichpy.pythonanywhere.com/api/category/" <br>
                     headers = {"Authorization": f"Bearer {access_token}"} <br>
                     response = requests.get(url, headers=headers) <br>
                     pprint.pprint(response.json()) <br>
@@ -79,35 +79,35 @@ API page
 'next': None,
 'previous': None,
 'results': {'categories': [{'children': [{'name': 'Programming',
-                             'products': 'http://127.0.0.1:8000/api/products_category_child/programming/'},
+                             'products': 'https://berdibaevichpy.pythonanywhere.com/api/products_category_child/programming/'},
                             {'name': 'Biznes kitaplar',
-                             'products': 'http://127.0.0.1:8000/api/products_category_child/biznes-kitaplar/'}],
+                             'products': 'https://berdibaevichpy.pythonanywhere.com/api/products_category_child/biznes-kitaplar/'}],
                'name': 'Books',
                'num_children': 2,
-               'products_url': 'http://127.0.0.1:8000/api/products_by_category/books/',
+               'products_url': 'https://berdibaevichpy.pythonanywhere.com/api/products_by_category/books/',
                'slug': 'books'},
               {'children': [{'name': 'Fitness aksessur',
-                             'products': 'http://127.0.0.1:8000/api/products_category_child/fitness-aksessur/'},
+                             'products': 'https://berdibaevichpy.pythonanywhere.com/api/products_category_child/fitness-aksessur/'},
                             {'name': 'Juwiriw ushin jollar',
-                             'products': 'http://127.0.0.1:8000/api/products_category_child/juwiriw-ushin-jollar/'}],
+                             'products': 'https://berdibaevichpy.pythonanywhere.com/api/products_category_child/juwiriw-ushin-jollar/'}],
                'name': 'Sport buyumlar',
                'num_children': 2,
-               'products_url': 'http://127.0.0.1:8000/api/products_by_category/sport-buyumlar/',
+               'products_url': 'https://berdibaevichpy.pythonanywhere.com/api/products_by_category/sport-buyumlar/',
                'slug': 'sport-buyumlar'},
               {'children': [{'name': 'AUX',
-                             'products': 'http://127.0.0.1:8000/api/products_category_child/aux/'},
+                             'products': 'https://berdibaevichpy.pythonanywhere.com/api/products_category_child/aux/'},
                             {'name': 'Samsung',
-                             'products': 'http://127.0.0.1:8000/api/products_category_child/samsung/'},
+                             'products': 'https://berdibaevichpy.pythonanywhere.com/api/products_category_child/samsung/'},
                             {'name': 'Artel',
-                             'products': 'http://127.0.0.1:8000/api/products_category_child/artel/'},
+                             'products': 'https://berdibaevichpy.pythonanywhere.com/api/products_category_child/artel/'},
                             {'name': 'Avalon',
-                             'products': 'http://127.0.0.1:8000/api/products_category_child/avalon/'}],
+                             'products': 'https://berdibaevichpy.pythonanywhere.com/api/products_category_child/avalon/'}],
                'name': 'Kontisionerler',
                'num_children': 4,
-               'products_url': 'http://127.0.0.1:8000/api/products_by_category/kontisionerler/',
+               'products_url': 'https://berdibaevichpy.pythonanywhere.com/api/products_by_category/kontisionerler/',
                'slug': 'kontisionerler'}],
-'customers': 'http://127.0.0.1:8000/api/customers/',
-'delivery_companies': 'http://127.0.0.1:8000/api/deliveries/'}}
+'customers': 'https://berdibaevichpy.pythonanywhere.com/api/customers/',
+'delivery_companies': 'https://berdibaevichpy.pythonanywhere.com/api/deliveries/'}}
           </code>
 
           </div>
