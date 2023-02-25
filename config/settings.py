@@ -87,12 +87,12 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "obazar",
-        "USER": "postgres",
-        "PASSWORD": "admin",
-        "HOST": "127.0.0.1",
-        "PORT": "127.0.0.1",
+        "ENGINE": os.environ.get('ENGINE', default="django.db.backends.sqlite3"),
+        "NAME": os.environ.get('NAME', default= BASE_DIR / "db.sqlite3"),
+        "USER": os.environ.get('USER', default='user'),
+        "PASSWORD": os.environ.get('PASSWORD', default='password'),
+        "HOST": os.environ.get('HOST', default='localhost'),
+        "PORT": os.environ.get('PORT', default='5432'),
     }
 }
 
