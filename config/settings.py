@@ -10,7 +10,7 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-+^!p+e+48&c^%i4@0(bsvd$a4muvd94d%bvq%o)y8^cgusxnf_"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = int(os.environ.get("DEBUG", default=0))
 PRODUCTION = int(os.environ.get('PRODUCTION', default=1))
 ALLOWED_HOSTS = ['.pythonanywhere.com', '127.0.0.1']
@@ -134,11 +134,11 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -168,16 +168,16 @@ LOGIN_REDIRECT_URL = 'account:dashboard'
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"#Bul GMAIL HOST bolip tabiladi
-EMAIL_HOST_USER = "hungrypandapy@gmail.com"
-EMAIL_HOST_PASSWORD = "oxfnvfhmtmpccmfn"
-EMAIL_USE_TLS = 1
-EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = int(os.environ.get("EMAIL_USE_TLS"))
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT"))
 # END SETUP EMAIL GOOGLE 
 
 # PAYMENT KEYS ID
-PUBLISHABLE_KEY = "pk_test_51MOjpRDh4Pu0qkGJdk7NFVquRuAFtHRjfzG67qcmxf2Q9AMog6teg0fQvayd0R0VRw09ILa9V5cX9tvebOkI7zVi001AZIRElY"
-PAYMENT_SECRET_KEY = "sk_test_51MOjpRDh4Pu0qkGJK8Qe4I9X2GERDaEV62lSzW1FLC4dDoBnp35fOzvjzW2ErnnRPmFTjR5RpURp1RgudjEjoZ9100xlkFvlQ2"
-STRIPE_ENDPOINT_SECRET = "whsec_60b6a945f9167bfbb107424fb8a9012a687e663bd96e0836d9353e7aa4ed92b1"
+PUBLISHABLE_KEY = os.environ.get("PUBLISHABLE_KEY")
+PAYMENT_SECRET_KEY = os.environ.get("PAYMENT_SECRET_KEY")
+STRIPE_ENDPOINT_SECRET = os.environ.get("STRIPE_ENDPOINT_SECRET")
 # END PAYMENT KEYS ID
 
 
@@ -197,9 +197,9 @@ REST_FRAMEWORK = {
 
 
 ALGOLIA = {
-    'APPLICATION_ID': "XKHY37EH5X",
-    'API_KEY': "a8309555c87bd07567e8d342f2e1057e",
-    'INDEX_PREFIX': "jetkerpy"
+    'APPLICATION_ID': os.environ.get("APPLICATION_ID"),
+    'API_KEY': os.environ.get("API_KEY"),
+    'INDEX_PREFIX': os.environ.get("INDEX_PREFIX")
 }
 
 
