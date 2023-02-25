@@ -52,8 +52,8 @@ def account_register(request):
             send_mail(subject, message, from_email, recipient_list)
             return HttpResponse('Registered successfully, so check out your account Gmail to activate your account.')
         
-        else:
-            return HttpResponse("Error try again.", status=400)
+        # else:
+        #     return HttpResponse("Error try again.", status=400)
 
     else:
         registerform = RegisterForm()
@@ -98,8 +98,8 @@ def edit_profile(request):
         form = UserEditForm(instance = request.user, data=request.POST)
         if form.is_valid():
             form.save()
-        else:
-            return HttpResponse("Fill out this form", status = 400)
+        # else:
+        #     return HttpResponse("Fill out this form", status = 400)
     else:
         form = UserEditForm(instance = request.user)
     context = {

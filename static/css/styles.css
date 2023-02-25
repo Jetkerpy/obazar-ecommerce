@@ -242,12 +242,67 @@ nav .search_box span:hover::after{
         margin-left: 200px;
     }
 
- 
-    
-
- 
 }
 
+@media screen and (max-width: 600px) {
+    nav{
+        display: block;
+        padding: 0;
+    }
+    nav .icon{
+        display: inline-block;
+        padding: 15px 30px;
+    }
+
+    nav .search_box{
+        width: 100%;
+        display: inline-flex;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+
+    nav .search_box input{
+        width: 50%;
+    }
+
+    nav ol{
+        margin-top: 0;
+        padding-bottom: 5px;
+        margin-left: 200px;
+    }
+
+  }
+
+@media screen and (max-width: 470px) {
+    nav{
+        display: block;
+        padding: 0;
+    }
+    nav .icon{
+        display: inline-block;
+        padding: 15px 30px;
+    }
+
+    nav .search_box{
+        width: 100%;
+        display: inline-flex;
+        justify-content: center;
+        margin-bottom: 15px;
+        max-width: auto;
+    }
+
+    nav .search_box input{
+        width: 50%;
+    }
+
+    nav ol{
+        margin-top: 0;
+        padding-bottom: 5px;
+
+    }
+   
+
+  }
 
 
 
