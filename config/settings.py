@@ -10,7 +10,7 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = "django-insecure-+^!p+e+48&c^%i4@0(bsvd$a4muvd94d%bvq%o)y8^cgusxnf_"
 DEBUG = int(os.environ.get("DEBUG", default=0))
 PRODUCTION = int(os.environ.get('PRODUCTION', default=1))
 ALLOWED_HOSTS = ['.pythonanywhere.com', '127.0.0.1']
@@ -83,14 +83,16 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+#os.environ.get("ENGINE")
+
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("ENGINE"),
-        "NAME": os.environ.get("NAME"),
-        "USER": os.environ.get("USER"),
-        "PASSWORD": os.environ.get("PASSWORD"),
-        "HOST": os.environ.get("HOST"),
-        "PORT": os.environ.get("PORT"),
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "obazar",
+        "USER": "postgres",
+        "PASSWORD": "admin",
+        "HOST": '127.0.0.1',
+        "PORT": '5432',
     }
 }
 
@@ -160,19 +162,19 @@ LOGIN_REDIRECT_URL = 'account:dashboard'
 
 
 # SETUP EMAIL GOOGLE 
-DEFAULT_AUTO_FIELD = os.environ.get("DEFAULT_AUTO_FIELD")
-EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND")
-EMAIL_HOST = os.environ.get("EMAIL_HOST") #Bul GMAIL HOST bolip tabiladi
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
-EMAIL_USE_TLS = int(os.environ.get("EMAIL_USE_TLS"))
-EMAIL_PORT = int(os.environ.get("EMAIL_PORT"))
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"#Bul GMAIL HOST bolip tabiladi
+EMAIL_HOST_USER = "hungrypandapy@gmail.com"
+EMAIL_HOST_PASSWORD = "oxfnvfhmtmpccmfn"
+EMAIL_USE_TLS = 1
+EMAIL_PORT = 587
 # END SETUP EMAIL GOOGLE 
 
 # PAYMENT KEYS ID
-PUBLISHABLE_KEY = os.environ.get("PUBLISHABLE_KEY")
-PAYMENT_SECRET_KEY = os.environ.get("PAYMENT_SECRET_KEY")
-STRIPE_ENDPOINT_SECRET = os.environ.get("STRIPE_ENDPOINT_SECRET")
+PUBLISHABLE_KEY = "pk_test_51MOjpRDh4Pu0qkGJdk7NFVquRuAFtHRjfzG67qcmxf2Q9AMog6teg0fQvayd0R0VRw09ILa9V5cX9tvebOkI7zVi001AZIRElY"
+PAYMENT_SECRET_KEY = "sk_test_51MOjpRDh4Pu0qkGJK8Qe4I9X2GERDaEV62lSzW1FLC4dDoBnp35fOzvjzW2ErnnRPmFTjR5RpURp1RgudjEjoZ9100xlkFvlQ2"
+STRIPE_ENDPOINT_SECRET = "whsec_60b6a945f9167bfbb107424fb8a9012a687e663bd96e0836d9353e7aa4ed92b1"
 # END PAYMENT KEYS ID
 
 
@@ -192,9 +194,9 @@ REST_FRAMEWORK = {
 
 
 ALGOLIA = {
-    'APPLICATION_ID': os.environ.get("APPLICATION_ID"),
-    'API_KEY': os.environ.get("API_KEY"),
-    'INDEX_PREFIX': os.environ.get("INDEX_PREFIX")
+    'APPLICATION_ID': "XKHY37EH5X",
+    'API_KEY': "a8309555c87bd07567e8d342f2e1057e",
+    'INDEX_PREFIX': "jetkerpy"
 }
 
 
