@@ -2,12 +2,21 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from django.contrib import messages
 from django.db.models import Q
+from checkout.models import Delivery
 from .models import (
     Product,
     ProductInventory,
     Category,
-    Media
+    Media,
+    BestSellingProducts
 )
+
+
+# FOR GIFTS IMPORT
+from django.conf import settings
+from .floweraura_category import GiftCategory
+from .floweraura_product import GiftProduct
+# END FOR GIFTS IMPORT
 
 # FOR PRACTISE BUT IMAGES DOESNT WORK
 def get_fake(request):
@@ -66,6 +75,16 @@ def products(request):
 # END ALL PRODUCTS
 
 
+# BEST SELLING PRODUCTS
+def get_best_selling_products(request):
+    products = BestSellingProducts.objects.select_related("product").filter(quantity__gt = 1)
+    context = {
+        "products": products
+    }
+    return render(request, 'inventory/best_selling_products.html', context)
+# END BEST SELLING PRODUCTS
+
+
 # PRODUCTS BY CATEGORY
 def products_by_category(request, slug):
     #slug = "biznes-kitaplar"
@@ -103,3 +122,78 @@ def product_detail(request, slug):
     }
     return render(request, 'inventory/product_detail.html', context)
 # END PRODUCT DETAIL
+
+
+
+
+
+# GIFT IDEAS
+
+def get_data_from_floweraura(url):
+    data = GiftCategory(url=url)
+    return data
+
+
+def get_gifts(num: int):
+    url = settings.FLOWERAURA_URL
+    data = get_data_from_floweraura(url)
+    return data.filter_gift(num)
+
+
+
+def get_gifts_list(request):
+    context = {
+        "gifts_hampers": get_gifts(0),
+        "for_hers": get_gifts(1),
+        "for_hims": get_gifts(2),
+        "home_kitchens": get_gifts(3),
+        "fashions": get_gifts(4),
+        "more_gifts": get_gifts(5),
+    }
+    return render(request, 'inventory/gifts.html', context)
+
+
+def check_name(name: str):
+    arr = ['Girlfriend', 'Wife', 'Mother', 'Sister', 'Daughter', 'Boyfriend', 'Husband', 'Father', 'Brother', 'Son', 'Boys', "Kids", "Parents"]
+    if name not in arr:
+        return name
+    return f"For {name}"
+
+
+def get_products_by_gift(request, name):
+    url = settings.FLOWERAURA_URL
+    products = GiftProduct(url)
+    checked_name = check_name(name)
+    context = {
+        'gift': name,
+        'products': products.get_products(checked_name),
+    }
+    return render(request, 'inventory/products_by_gift.html', context)
+
+
+# END GIFT IDEAS
+
+
+# DELIVERY SERVICE
+def get_delivery_services(request):
+    deliveries = Delivery.objects.all()
+    page = "delivery"
+    context = {
+        "deliveries": deliveries,
+        "page":page
+    }
+    return render(request, 'inventory/delivery_services.html', context)
+
+
+
+def get_delivery_method(request, method):
+    deliveries = Delivery.objects.filter(delivery_method = method)
+    page = "method"
+    context = {
+        "deliveries": deliveries,
+        "page":page
+    }
+    return render(request, 'inventory/delivery_services.html', context)
+
+
+# END DELIVERY SERVICE

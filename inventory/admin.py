@@ -36,3 +36,5 @@ class MediaAdmin(admin.ModelAdmin):
 # Table ProductAttributeValue
 admin.site.register(models.ProductAttributeValue)
 
+
+admin.site.register(models.BestSellingProducts)

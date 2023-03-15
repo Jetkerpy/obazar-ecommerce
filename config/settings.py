@@ -143,6 +143,11 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# FLOWERAURA URL
+FLOWERAURA_URL = "https://www.floweraura.com"
+# END FLOWERAURA URL
+
+
 # BASKET
 BASKET_SESSION_DATA = "basket"
 # END BASKET

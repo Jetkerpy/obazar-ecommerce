@@ -272,3 +272,14 @@ class ProductAttributeValue(models.Model):
     def __str__(self):
         return f"{self.attribute_name}: {self.attribute_value}"
 # END PRODUCTATTRIBUTETABLE TABLE 
+
+
+# MOST SOLD PRODUCTS
+class BestSellingProducts(models.Model):
+    product = models.ForeignKey(ProductInventory, on_delete=models.PROTECT, related_name='best_selling_products')
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.product.product.name} {self.quantity}"
+        
+# END MOST SOLD PRODUCTS

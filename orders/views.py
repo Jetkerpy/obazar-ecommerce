@@ -5,7 +5,8 @@ from django.http import JsonResponse
 from account.models import Address
 from basket.basket import Basket
 from .models import OrderItem, Order
-from inventory.models import ProductInventory
+from inventory.models import ProductInventory, BestSellingProducts
+
 
 # Create your views here.
 
@@ -45,16 +46,20 @@ def create_order(address_id, order_key, user, total_paid):
 # END CREATE ORDER FUNCTION
 
 
+
 # CREATE ORDERITEM FUNCTION
 def create_orderitem(request, order_id):
     basket = Basket(request)
     for item in basket:
+        product = item.get('product')
+        quantity = item['quantity']
         OrderItem.objects.create(
             order_id = order_id,
-            product = item.get('product'),
+            product = product,
             price = item['price'],
-            quantity = item['quantity']
+            quantity = quantity
         )
+        add_to_best_selling_products(product=product, quantity=quantity)
 # END CREATE ORDERITEM FUNCTION
 
 
@@ -145,6 +150,18 @@ def create_order_item(order_id, product_id, price, quantity = 1):
 # END CREATE ORDERITEM
 
 
+# ADD TO BEST SELLING PRODUCT
+def add_to_best_selling_products(product, quantity = 1):
+    best_selling = BestSellingProducts.objects.filter(product=product).first()
+    if best_selling:
+        best_selling.quantity += quantity
+        best_selling.save()
+    else:
+        BestSellingProducts.objects.create(product = product, quantity = quantity)
+# END ADD TO BEST SELLING PRODUCT
+
+
+
 # ADD PAYMENT ONE CLICK
 def add_one_click(request):
     if request.POST.get('action') == 'post':
@@ -156,6 +173,7 @@ def add_one_click(request):
         address_id = create_address(request, user)
         order_id = create_order_and_get_id(user.pk, address_id, order_key, total_paid=total_price)
         order_item = create_order_item(order_id, product_id, product.sale_price)
+        add_to_best_selling_products(product=product)
         response = JsonResponse({'success': True})
         return response
 # END ADD PAYMENT ONE CLICK
