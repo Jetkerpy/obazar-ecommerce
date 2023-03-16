@@ -32,25 +32,26 @@ def account_register(request):
             user.set_password(registerform.cleaned_data['password'])
             user.is_active = True #Because doesn't work Gmail when after deployed
             user.save()
+            return redirect('account:dashboard')
 
             # SETUP E-mail
-            current_site = get_current_site(request)
-            subject = "Active your Account"
-            message = render_to_string(
-                "account/account_activation_email.html",
-                {
-                    'user': user,
-                    'domain': current_site.domain,
-                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                    'token': account_activation_token.make_token(user),
+            # current_site = get_current_site(request)
+            # subject = "Active your Account"
+            # message = render_to_string(
+            #     "account/account_activation_email.html",
+            #     {
+            #         'user': user,
+            #         'domain': current_site.domain,
+            #         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            #         'token': account_activation_token.make_token(user),
 
-                })
+            #     })
             
-            #user.email_user(subject=subject, message = message)
-            from_email = settings.EMAIL_HOST_USER
-            recipient_list = [user.email]
-            send_mail(subject, message, from_email, recipient_list)
-            return HttpResponse('Registered successfully, so check out your account Gmail to activate your account.')
+            # #user.email_user(subject=subject, message = message)
+            # from_email = settings.EMAIL_HOST_USER
+            # recipient_list = [user.email]
+            # send_mail(subject, message, from_email, recipient_list)
+            # return HttpResponse('Registered successfully, so check out your account Gmail to activate your account.')
         
         # else:
         #     return HttpResponse("Error try again.", status=400)
