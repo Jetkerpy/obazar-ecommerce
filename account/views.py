@@ -30,7 +30,7 @@ def account_register(request):
             user = registerform.save(commit=False)
             user.email = registerform.cleaned_data.get('email')
             user.set_password(registerform.cleaned_data['password'])
-            user.is_active = False
+            user.is_active = True #Because doesn't work Gmail when after deployed
             user.save()
 
             # SETUP E-mail
