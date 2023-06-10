@@ -2,7 +2,9 @@
 import os
 from datetime import timedelta
 from pathlib import Path
+
 from dotenv import load_dotenv
+
 load_dotenv()
 
 # load_dotenv() waziypasi bir jaratqan .env formatda file bar edi usilardin key valuesin oqiw ushin kerek boladi
@@ -10,7 +12,7 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-+^!p+e+48&c^%i4@0(bsvd$a4muvd94d%bvq%o)y8^cgusxnf_"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = int(os.environ.get("DEBUG", default=0))
 PRODUCTION = int(os.environ.get('PRODUCTION', default=1))
 ALLOWED_HOSTS = ['.pythonanywhere.com', '127.0.0.1']
